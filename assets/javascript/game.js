@@ -27,8 +27,7 @@ function resetGame()
     ary=Array.from(computerGuess);
     resetAnswer(computerGuess.length);
 	document.getElementById("guess").innerHTML = "Number of guesses allowed : " + TOTALGUESS + "  <br><br>" + answer.join(" ") ;
-	document.getElementById("hangman").innerHTML = "<img src=" + "\"assets/images/hangman0.gif\"" + ">";
-	document.getElementById("result").innerHTML = "Your wins : "+totalWins  +" Your losses :"+ totalLoss+"<br>";
+	document.getElementById("hangman").innerHTML = "<br><img src=" + "\"assets/images/hangman0.gif\"" + ">";
 	userGuessFound=0;
 	userKeys=[];
 
@@ -49,6 +48,9 @@ document.onkeyup = function(event) {
         // Determines which exact key was selected. Make it lowercase
     
      var imageStr;
+     var audioKick = new Audio('assets/audio/kick-2.wav');
+     var audioKey = new Audio('assets/audio/key.wav');
+     audioKey.play();
     if ( event.code == "Space")
     {
         
@@ -65,7 +67,7 @@ document.onkeyup = function(event) {
     	guessCount++;	
         }
         var rnd = Math.floor(Math.random()*99999);
-        imageStr= "<img src=" + "\"assets/images/hangman" + guessCount+".gif?"+rnd + "\""+">" ;
+        imageStr= "<br><img src=" + "\"assets/images/hangman" + guessCount+".gif?"+rnd + "\""+">" ;
         userGuessFound =0;
         userGuess = String.fromCharCode(event.keyCode).toLowerCase();
         userKeys.push(userGuess);
@@ -94,7 +96,7 @@ document.onkeyup = function(event) {
 
         if ( guessCount == TOTALGUESS )
         {
-        	document.getElementById("guess").innerHTML =  ary.join(" ")+ "<br><br> Sorry the Game is Over, You Lost!! " ;
+        	document.getElementById("guess").innerHTML =  ary.join(" ")+ "<br><br> Sorry, You Lost!! " ;
         	document.getElementById("hangman").innerHTML = imageStr;
             totalLoss++;
         	guessCount =0;
@@ -111,6 +113,8 @@ document.onkeyup = function(event) {
     	 if ( gameReset == 2)
     	{
     		document.getElementById("hangman").innerHTML = "<img src=" + "\"assets/images/hangman.gif?"+ rnd + "\""+">" ;
+            document.getElementById("result").innerHTML = "Your wins : "+totalWins  +" Your losses :"+ totalLoss+"<br>";
+            audioKick.play();
     		gameReset=0;
     		
     	}

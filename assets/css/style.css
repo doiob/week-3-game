@@ -1,6 +1,6 @@
 body
 {
-    margin:150px;
+    margin-left:250px;
     font-size:35px;
  }
 
@@ -9,4 +9,9 @@ img
 {
     height: 250px;
     width:  350px;
+}
+#theme
+{
+	height:300px;
+	width:600px;
 }
